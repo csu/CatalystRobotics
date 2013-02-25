@@ -17,12 +17,16 @@
 // #pragma DebuggerWindows("debugStream")
 
 #include "JoystickDriver.c"
-#include "../Headers/CSEnumerated.h"6
+#include "../Headers/CSEnumerated.h"
 #include "../Headers/CSMethods.h"
 
 task main() {
 	for(int i;;i++)
 	{
+
+		MotorF(motorA, 25);
+		MotorF(motorB, 25);
+		MotorF(motorC, 25);
 		MotorF(motor11, 90);
 		MotorF(motor22, 90);
 		MotorF(motor12, 90);
