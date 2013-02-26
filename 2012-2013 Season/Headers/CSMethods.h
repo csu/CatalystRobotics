@@ -6,7 +6,6 @@
 void CatsAndCorgis() { getJoystickSettings(joystick); }
 
 int Happy(ControllerMeta starfish = CONTROLLER_A, ControllerJoystick twig, ControllerJoystickAxis axe) {
-  // ex. Happy(CONTROLLER_A, JOYSTICK_L, AXIS_Y);
   int temp = 0;
 
   switch (starfish) {
@@ -298,40 +297,6 @@ void holonomicEncodedSpinRight(float power, float revolutions) {
 	MotorS(motor22);
 	MotorS(motor11);
 	MotorS(motor21);
-}
-
-task simultaneousTwoMotorEncodeOne() {
-	writeDebugStreamLine("Task one started");
-	nMotorEncoder[simultaneousTwoMotorEncodeMotorOne] = 0;
-	while(abs(nMotorEncoder[simultaneousTwoMotorEncodeMotorOne]) < 1260*simultaneousTwoMotorEncodeRevolutions) {
-		motor[simultaneousTwoMotorEncodeMotorOne] = simultaneousTwoMotorEncodePower;
-	}
-	motor[simultaneousTwoMotorEncodeMotorOne] = 0;
-	writeDebugStreamLine("Task one done");
-	StopTask(simultaneousTwoMotorEncodeOne);
-}
-
-task simultaneousTwoMotorEncodeTwo() {
-	writeDebugStreamLine("Task two started");
-	nMotorEncoder[simultaneousTwoMotorEncodeMotorTwo] = 0;
-	while(abs(nMotorEncoder[simultaneousTwoMotorEncodeMotorTwo]) < 1260*simultaneousTwoMotorEncodeRevolutions) {
-		motor[simultaneousTwoMotorEncodeMotorTwo] = simultaneousTwoMotorEncodePower;
-	}
-	motor[simultaneousTwoMotorEncodeMotorTwo] = 0;
-	writeDebugStreamLine("Task two done");
-	StopTask(simultaneousTwoMotorEncodeTwo);
-}
-
-void simultaneousTwoMotorEncode(tMotor x, tMotor y, int power, float revs) {
-	writeDebugStreamLine("Starting task launch method");
-	simultaneousTwoMotorEncodeMotorOne = x;
-	simultaneousTwoMotorEncodeMotorTwo = y;
-	simultaneousTwoMotorEncodePower = power;
-	simultaneousTwoMotorEncodeRevolutions = revs;
-	writeDebugStreamLine("Set global variables in task lauch method");
-	StartTask(simultaneousTwoMotorEncodeOne);
-	StartTask(simultaneousTwoMotorEncodeTwo);
-	writeDebugStreamLine("Done");
 }
 
 #endif
