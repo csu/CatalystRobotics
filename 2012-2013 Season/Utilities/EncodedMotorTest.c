@@ -9,6 +9,7 @@ short numberToDisplay = 0;
 task main()
 {
 	while(true) {
+		motor[motor11] = 50;
 		numberToDisplay = nMotorEncoder[motor11];
 		nxtDisplayCenteredTextLine(3, "%d", numberToDisplay);
 		wait10Msec(10);
