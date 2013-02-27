@@ -141,7 +141,7 @@ void touchMultiplexerUpdate() {
 
 void ArmUp() {
 	nMotorEncoder[motorArm] = 0;
-	while((nMotorEncoder[motorArm] < 1260*armToTopRevolutions) && !touchMuxer2)
+	while((nMotorEncoder[motorArm] < 1260*ARM_TO_TOP_REVOLUTIONS) && !touchMuxer2)
 	{
 		touchMultiplexerUpdate();
 		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
@@ -152,7 +152,7 @@ void ArmUp() {
 
 void ArmDown() {
 	nMotorEncoder[motorArm] = 0;
-	while((nMotorEncoder[motorArm] > -1260*armToTopRevolutions) && !touchMuxer1)
+	while((nMotorEncoder[motorArm] > -1260*ARM_TO_TOP_REVOLUTIONS) && !touchMuxer1)
 	{
 		touchMultiplexerUpdate();
 		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
