@@ -1,5 +1,5 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  none)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S2,     lightSensor,    sensorLightActive)
 #pragma config(Sensor, S3,     touchMuxer,     sensorHiTechnicTouchMux)
 #pragma config(Sensor, S4,     IRseeker,       sensorHiTechnicIRSeeker1200)
 #pragma config(Motor,  mtr_S1_C1_1,     motor12,       tmotorTetrix, openLoop, reversed)
@@ -24,7 +24,6 @@ void processWheels() {
 			spinRight();
 	else if(Button(CONTROLLER_A, 6))
 			spinLeft();
-
 
 	if (((Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X) > 15) || (Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X) < -15)) && !Button(CONTROLLER_A, 7)) {
 		MotorF(motor11, Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X));
@@ -72,7 +71,7 @@ void processWheels() {
 
 void processArm() {
 	if ((Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) > 15) || (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) < -15)) {
-		if(!touchMuxer1 && !touchMuxer2)
+		if(!touchMuxer1 && !touchMuxer2)8
 			MotorF(motorArm, Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2);
 		else if (!touchMuxer1 && (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2 < 0))
 			MotorF(motorArm, Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2);
