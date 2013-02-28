@@ -71,7 +71,7 @@ void processWheels() {
 
 void processArm() {
 	if ((Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) > 15) || (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) < -15)) {
-		if(!touchMuxer1 && !touchMuxer2)8
+		if(!touchMuxer1 && !touchMuxer2)
 			MotorF(motorArm, Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2);
 		else if (!touchMuxer1 && (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2 < 0))
 			MotorF(motorArm, Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2);
@@ -84,9 +84,9 @@ void processArm() {
 		MotorS(motorArm);
 
 	if (Button(CONTROLLER_B, 4))
-		ArmUpDistance(0.25);
+		ArmUpDistance(0.075);
 	else if (Button(CONTROLLER_B, 2))
-		ArmDownDistance(0.25);
+		ArmDownDistance(0.075);
 }
 
 void processSensors() {
