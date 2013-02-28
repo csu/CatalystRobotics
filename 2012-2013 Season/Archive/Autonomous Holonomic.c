@@ -21,24 +21,57 @@ void initializeRobot() { return; }
 
 task main() {
   initializeRobot();
-  //waitForStart(); // Wait for the beginning of autonomous phase.
+  waitForStart(); // Wait for the beginning of autonomous phase.
 
+  //wait10Msec(1500);
+
+	//ArmUpDistance(2);
 	/*
 	while (true) {
 		writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
 	}
 	*/
 
-	motorForwardForDistance(75, 5);
+	//holonomicEncodedForward(100, 4.8); //each revolution moves 6.5 inches, was 6.780523077
+	holonomicEncodedForward(100, 5);
 	wait10Msec(50);
+	holonomicEncodedSpinRight(100, 0.775);
+	//wait10Msec(1000);
 
+	//ArmUpDistance(8.5);
+	/*
+	while (SensorValue(IRseeker) != autonomousIRseekerTarget) {
+		writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
+		if (SensorValue(IRseeker) == 0) {
+			MotorS(motor12);
+			MotorS(motor22);
+			MotorS(motor11);
+			MotorS(motor21);
+		}
+		else if (SensorValue(IRseeker) < autonomousIRseekerTarget) {
+			holonomicEncodedStrafe(-25, 0.1);
+			wait10Msec(10);
+		}
+		else if (SensorValue(IRseeker) > autonomousIRseekerTarget) {
+			holonomicEncodedStrafe(25, 0.1);
+			wait10Msec(10);
+		}
+	}
+	*/
   ArmUp();
   wait10Msec(100);
-  holonomicEncodedForward(100,1.55);
+  holonomicEncodedForward(100,1.55); // was 75
   wait10Msec(100);
   ArmDownDistance(2);
   wait10Msec(100);
   holonomicEncodedForward(-100,3);
+  //specifyTwoMotorsForDistance(motor11, motor21, 100, 3);
   wait10Msec(100);
   ArmDown();
+
+  /*while(true){
+  	for(int i = 0; i<250; i=i+25) {
+ 	 servo[servo1] = i;
+ 	 wait10Msec(100);
+ }*/
 }
