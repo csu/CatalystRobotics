@@ -21,15 +21,8 @@ void initializeRobot() { return; }
 
 task main() {
   initializeRobot();
-  //waitForStart(); // Wait for the beginning of autonomous phase.
+  //waitForStart();
 
-	/*
-	while (true) {
-		writeDebugStreamLine("Sensor: %d", SensorValue(lightSensor));
-	}
-	*/
-
-	//holonomicEncodedStrafe(75,3);
 	motorForDistance(75, 5.2);
 	wait10Msec(autonomous10Mdelay);
 	encodedTurn(75, 0.5);
@@ -71,7 +64,6 @@ task main() {
 			break;
 		}
 	}
-
   ArmUp();
   wait10Msec(100);
   motorForDistance(100,1.55);
