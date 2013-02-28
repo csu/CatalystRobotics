@@ -163,8 +163,7 @@ void ArmDown() {
 
 void motorForwardForDistance(int powerToMoveAt, float revolutions) {
 	nMotorEncoder[motor12] = 0;
-	nMotorEncoder[motor22] = 0;
-	while(nMotorEncoder[motor11] < 1260*revolutions)
+	while(nMotorEncoder[motor12] < 1260*revolutions) //It may seem like motor12 refers to motor controller 1, motor 2, but it ACTUALLY refers to motor controller 1, motor 1
 	{
 		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor12] = powerToMoveAt;
@@ -175,8 +174,8 @@ void motorForwardForDistance(int powerToMoveAt, float revolutions) {
 }
 
 void motorBackwardForDistance(int powerToMoveAt, float revolutions) {
-	nMotorEncoder[motor22] = 0;
-	while(nMotorEncoder[motor11] > -1260*revolutions)
+	nMotorEncoder[motor12] = 0;
+	while(nMotorEncoder[motor12] > -1260*revolutions)
 	{
 		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor12] = -powerToMoveAt;
@@ -187,13 +186,61 @@ void motorBackwardForDistance(int powerToMoveAt, float revolutions) {
 }
 
 void motorForDistance(int powerToMoveAt, float revolutions) {
-	nMotorEncoder[motor22] = 0;
-	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
+	nMotorEncoder[motor12] = 0;
+	while(abs(nMotorEncoder[motor12]) < 1260*revolutions)
 	{
+		writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor12]);
 		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor12] = powerToMoveAt;
 	  motor[motor22] = powerToMoveAt;
 	}
+	motor[motor12] = 0;
+	motor[motor22] = 0;
+}
+
+void motorStrafeForDistance(int powerToMoveAt, float revolutions) {
+	nMotorEncoder[motor21] = 0;
+	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
+	{
+		writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
+		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
+	  motor[motor11] = powerToMoveAt;
+	  motor[motor21] = powerToMoveAt;
+	}
+	motor[motor11] = 0;
+	motor[motor21] = 0;
+}
+
+void encodedDiagonal(int powerToMoveAt, float revolutions) {
+	nMotorEncoder[motor21] = 0;
+	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
+	{
+		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
+		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
+	  motor[motor11] = powerToMoveAt;
+	  motor[motor21] = powerToMoveAt;
+	  motor[motor12] = powerToMoveAt;
+	  motor[motor22] = powerToMoveAt;
+	}
+	motor[motor11] = 0;
+	motor[motor21] = 0;
+	motor[motor12] = 0;
+	motor[motor22] = 0;
+}
+
+void encodedTurn(int powerToMoveAt, float revolutions) {
+	nMotorEncoder[motor21] = 0;
+	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
+	{
+		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
+		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
+	  MotorR(motor11, powerToMoveAt);
+	  MotorF(motor12, powerToMoveAt);
+	  MotorF(motor21, powerToMoveAt);
+	  MotorR(motor22, powerToMoveAt);
+	}
+	motor[motor11] = 0;
+	motor[motor21] = 0;
 	motor[motor12] = 0;
 	motor[motor22] = 0;
 }

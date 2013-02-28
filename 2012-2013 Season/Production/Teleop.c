@@ -1,9 +1,10 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  none)
+#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     lightSensor,    sensorLightActive)
 #pragma config(Sensor, S3,     touchMuxer,     sensorHiTechnicTouchMux)
 #pragma config(Sensor, S4,     IRseeker,       sensorHiTechnicIRSeeker1200)
-#pragma config(Motor,  mtr_S1_C1_1,     motor12,       tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S1_C1_2,     motor11,       tmotorTetrix, PIDControl, encoder)
+#pragma config(Motor,  mtr_S1_C1_1,     motor12,       tmotorTetrix, PIDControl, reversed, encoder)
+#pragma config(Motor,  mtr_S1_C1_2,     motor11,       tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_1,     motor21,       tmotorTetrix, PIDControl, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C2_2,     motor22,       tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     motorArm,      tmotorTetrix, openLoop, reversed)
@@ -96,6 +97,7 @@ void processSensors() {
 task main() {
 	initializeRobot();
 	for (int i=0; ; i++) {
+		//writeDebugStreamLine("Sensor: %d", SensorValue(lightSensor));
 		CatsAndCorgis();
 		processSensors();
 		processWheels();
