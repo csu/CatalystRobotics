@@ -10,6 +10,12 @@
 #define JOYSTICK_LOWER_THRESHOLD -15
 
 #define ARM_TO_TOP_REVOLUTIONS 17
+#define ARM_TO_MIDDLE_REVOLUTIONS 8
+
+//autonomous
+int autonomous10Mdelay = 10;
+int irSeekingDelay = 50;
+int irStrafeCount = 1;
 
 //legacy
 int joystickUpperThreshold = 15;
