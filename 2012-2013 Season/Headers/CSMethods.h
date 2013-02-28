@@ -141,7 +141,7 @@ void touchMultiplexerUpdate() {
 
 void ArmUp() {
 	nMotorEncoder[motorArm] = 0;
-	while((nMotorEncoder[motorArm] < 1260*armToTopRevolutions) && !touchMuxer2)
+	while((nMotorEncoder[motorArm] < 1260*ARM_TO_TOP_REVOLUTIONS) && !touchMuxer2)
 	{
 		touchMultiplexerUpdate();
 		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
@@ -152,7 +152,7 @@ void ArmUp() {
 
 void ArmDown() {
 	nMotorEncoder[motorArm] = 0;
-	while((nMotorEncoder[motorArm] > -1260*armToTopRevolutions) && !touchMuxer1)
+	while((nMotorEncoder[motorArm] > -1260*ARM_TO_TOP_REVOLUTIONS) && !touchMuxer1)
 	{
 		touchMultiplexerUpdate();
 		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
@@ -164,7 +164,7 @@ void ArmDown() {
 void motorForwardForDistance(int powerToMoveAt, float revolutions) {
 	nMotorEncoder[motor12] = 0;
 	nMotorEncoder[motor22] = 0;
-	while(nMotorEncoder[motor22] < 1260*revolutions)
+	while(nMotorEncoder[motor11] < 1260*revolutions)
 	{
 		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor12] = powerToMoveAt;
@@ -176,7 +176,7 @@ void motorForwardForDistance(int powerToMoveAt, float revolutions) {
 
 void motorBackwardForDistance(int powerToMoveAt, float revolutions) {
 	nMotorEncoder[motor22] = 0;
-	while(nMotorEncoder[motor22] > -1260*revolutions)
+	while(nMotorEncoder[motor11] > -1260*revolutions)
 	{
 		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor12] = -powerToMoveAt;
@@ -188,7 +188,7 @@ void motorBackwardForDistance(int powerToMoveAt, float revolutions) {
 
 void motorForDistance(int powerToMoveAt, float revolutions) {
 	nMotorEncoder[motor22] = 0;
-	while(abs(nMotorEncoder[motor22]) < 1260*revolutions)
+	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
 	{
 		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor12] = powerToMoveAt;

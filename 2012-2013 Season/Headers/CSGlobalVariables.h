@@ -1,8 +1,20 @@
 #ifndef GLOBALVARS
 #define GLOBALVARS
 
+#define CONTROLLER_A_UPDATE_DELAY 0
+#define CONTROLLER_B_UPDATE_DELAY 0
+#define MOTOR_UPDATE_DELAY 0
+#define SENSOR_UPDATE_DELAY 0
+
+#define JOYSTICK_UPPER_THRESHOLD 15
+#define JOYSTICK_LOWER_THRESHOLD -15
+
+#define ARM_TO_TOP_REVOLUTIONS 17
+
+//legacy
 int joystickUpperThreshold = 15;
 int joystickLowerThreshold = -15;
+
 //tMotor simultaneousTwoMotorEncodeMotorOne = motor12;
 //tMotor simultaneousTwoMotorEncodeMotorTwo = motor22;
 //int simultaneousTwoMotorEncodePower = 75;
