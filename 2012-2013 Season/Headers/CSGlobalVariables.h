@@ -17,6 +17,7 @@ int autonomous10Mdelay = 10;
 int irSeekingDelay = 50;
 int irStrafeCount = 1;
 int autonomousWheelPower = 90;
+int lightStrafeCount = 1;
 
 //replaced by JOYSTICK_UPPER_THRESHOLD and JOYSTICK_LOWER_THRESHOLD
 //int joystickUpperThreshold = 15;
