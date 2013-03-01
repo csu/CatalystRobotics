@@ -1,6 +1,5 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  none)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
-#pragma config(Sensor, S2,     lightSensor,    sensorLightActive)
+#pragma config(Sensor, S2,     gyroSensor,     sensorI2CHiTechnicGyro)
 #pragma config(Sensor, S3,     touchMuxer,     sensorHiTechnicTouchMux)
 #pragma config(Sensor, S4,     IRseeker,       sensorHiTechnicIRSeeker1200)
 #pragma config(Motor,  mtr_S1_C1_1,     motor12,       tmotorTetrix, PIDControl, reversed, encoder)
@@ -16,8 +15,20 @@
 #include "JoystickDriver.c"
 #include "../Headers/CSEnumerated.h"
 #include "../Headers/CSMethods.h"
+#include "../Drivers/HTGYRO-driver.h"
 
-void initializeRobot() { return; }
+void initializeRobot() {
+	/*
+  GyroOffset = HTGYROstartCal(gyroSensor);   //start calibration, but do not trust results
+  for (int i = 0 ; i < 20; i++)           //instead read 10 values and generate average offset
+  {
+    GyroSum = GyroSum + HTGYROreadRot(gyroSensor);
+    wait1Msec(20);
+  }
+  GyroOffset = GyroSum / 20.0;
+  */
+	return;
+}
 
 task main() {
   initializeRobot();
@@ -29,11 +40,16 @@ task main() {
 	irDecision = SensorValue(IRseeker);
 	motorForDistance(-autonomousWheelPower, 1);
 	if (irDecision == 5) {
-		motorStrafeForDistance(-autonomousWheelPower, 3.7);
 		wait10Msec(autonomous10Mdelay);
-		encodedDiagonal(autonomousWheelPower, 4.3);
+		encodedTurn(autonomousWheelPower, 0.09);
 		wait10Msec(autonomous10Mdelay);
-		motorForDistance(autonomousWheelPower, 0.2);
+		motorStrafeForDistance(-autonomousWheelPower, 4.2);
+		wait10Msec(autonomous10Mdelay);
+		encodedDiagonal(autonomousWheelPower, 4.65);
+		//wait10Msec(autonomous10Mdelay);
+		//motorForDistance(autonomousWheelPower, 0.2);
+		wait10Msec(autonomous10Mdelay);
+		//gyroCompensate();
 		while (SensorValue(IRseeker) != irTarget) {
 			writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
 			if (SensorValue(IRseeker) == 0) {
@@ -64,6 +80,8 @@ task main() {
 				break;
 			}
 		}
+		motorStrafeForDistance(-autonomousWheelPower, 0.2);
+	  wait10Msec(autonomous10Mdelay);
 	  ArmUp();
 	  wait10Msec(autonomous10Mdelay);
 	  motorForDistance(autonomousWheelPower,1);

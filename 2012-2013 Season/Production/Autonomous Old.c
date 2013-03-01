@@ -17,7 +17,9 @@
 #include "../Headers/CSEnumerated.h"
 #include "../Headers/CSMethods.h"
 
-void initializeRobot() { return; }
+void initializeRobot() {
+	return;
+}
 
 task main() {
   initializeRobot();
