@@ -189,8 +189,7 @@ void motorForDistance(int powerToMoveAt, float revolutions) {
 	nMotorEncoder[motor12] = 0;
 	while(abs(nMotorEncoder[motor12]) < 1260*revolutions)
 	{
-		writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor12]);
-		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
+		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor12]);
 	  motor[motor12] = powerToMoveAt;
 	  motor[motor22] = powerToMoveAt;
 	}
@@ -202,8 +201,7 @@ void motorStrafeForDistance(int powerToMoveAt, float revolutions) {
 	nMotorEncoder[motor21] = 0;
 	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
 	{
-		writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
-		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
+		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
 	  motor[motor11] = powerToMoveAt;
 	  motor[motor21] = powerToMoveAt;
 	}
@@ -216,7 +214,6 @@ void encodedDiagonal(int powerToMoveAt, float revolutions) {
 	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
 	{
 		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
-		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor11] = powerToMoveAt;
 	  motor[motor21] = powerToMoveAt;
 	  motor[motor12] = powerToMoveAt;
@@ -233,7 +230,6 @@ void encodedTurn(int powerToMoveAt, float revolutions) {
 	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
 	{
 		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
-		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  MotorR(motor11, powerToMoveAt);
 	  MotorF(motor12, powerToMoveAt);
 	  MotorF(motor21, powerToMoveAt);
@@ -300,7 +296,6 @@ void holonomicEncodedForward(float power, float revolutions) {
 	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
 	{
 		//writeDebugStreamLine("motor11 Encoder: %d", nMotorEncoder[motor11]);
-		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
 		MotorF(motor12, power);
 		MotorF(motor22, power);
 		MotorF(motor11, -power);
@@ -317,7 +312,6 @@ void holonomicEncodedSpinLeft(float power, float revolutions) {
 	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
 	{
 		//writeDebugStreamLine("motor11 Encoder: %d", nMotorEncoder[motor11]);
-		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
 		MotorF(motor11, power);
 		MotorR(motor12, power);
 		MotorR(motor21, power);
@@ -334,7 +328,6 @@ void holonomicEncodedSpinRight(float power, float revolutions) {
 	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
 	{
 		//writeDebugStreamLine("motor11 Encoder: %d", nMotorEncoder[motor11]);
-		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
 		MotorR(motor11, power);
 		MotorF(motor12, power);
 		MotorF(motor21, power);
