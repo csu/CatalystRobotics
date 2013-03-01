@@ -97,7 +97,7 @@ void processSensors() {
 task main() {
 	initializeRobot();
 	for (int i=0; ; i++) {
-		writeDebugStreamLine("Sensor: %d", SensorValue(lightSensor));
+		//writeDebugStreamLine("Sensor: %d", SensorValue(lightSensor));
 		CatsAndCorgis();
 		processSensors();
 		processWheels();
