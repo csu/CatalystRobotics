@@ -28,7 +28,7 @@ int autonomousWheelPower = 90;
 //float simultaneousTwoMotorEncodeRevolutions = 1;
 //float armToTopRevolutions = 17; //replaced by ARM_TO_TOP_REVOLUTIONS
 int touchMuxerValue;
-short touchMuxer1, touchMuxer2, touchMuxer3, touchMuxer4;
+bool touchMuxer1, touchMuxer2, touchMuxer3, touchMuxer4; //short or bool?
 //int autonomousIRseekerTarget = 4;
 //int controllerAMultiplier = 1;
 //float motorSpeedFixMultiplier11 = 1;
