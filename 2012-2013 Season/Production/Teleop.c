@@ -83,7 +83,7 @@ void processArm() {
 	}
 	else
 		MotorS(motorArm);
-/
+
 	if (Button(CONTROLLER_B, 4))
 		ArmUpDistance(0.075);
 	else if (Button(CONTROLLER_B, 2))

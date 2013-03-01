@@ -20,6 +20,7 @@ int irSeekingDelay = 50;
 int irStrafeCount = 1;
 int irTarget = 5;
 int irLeftRightCount = 0;
+int irDecision = 0;
 // light sensor
 int lightForwardIterations = 3;
 int currentLight;
