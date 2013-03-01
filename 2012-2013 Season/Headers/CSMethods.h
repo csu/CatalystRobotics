@@ -133,10 +133,10 @@ void Wait(int time) { wait10Msec(time); }
 
 void touchMultiplexerUpdate() {
 	touchMuxerValue = SensorValue[S3];
-	touchMuxer1 = (touchMuxerValue & 0x01);
-	touchMuxer2 = (touchMuxerValue & 0x02);
-	touchMuxer3 = (touchMuxerValue & 0x03);
-	touchMuxer4 = (touchMuxerValue & 0x04);
+	touchMuxer1 = (bool)(touchMuxerValue & 0x01);
+	touchMuxer2 = (bool)(touchMuxerValue & 0x02);
+	touchMuxer3 = (bool)(touchMuxerValue & 0x03);
+	touchMuxer4 = (bool)(touchMuxerValue & 0x04);
 }
 
 void ArmUp() {
