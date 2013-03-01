@@ -19,25 +19,27 @@
 
 void initializeRobot() { return; }
 
-int lightSensorThreshold = 35;
+int lightSensorThreshold = 32;
 
 task main() {
 	int currentLight = SensorValue(lightSensor);
 	while (true) {
-		if ((currentLight < lightSensorThreshold-5) || (currentLight > lightSensorThreshold+5)) {
+		currentLight = SensorValue(lightSensor);
+		if (currentLight < lightSensorThreshold) { //-5) || (currentLight > lightSensorThreshold+5)) {
 			if (lightStrafeCount % 2 == 1) {
-				encodedDiagonal(autonomousWheelPower, 0.2);
-				lightStrafeCount++;
+				motorStrafeForDistance(autonomousWheelPower, 0.05);
+				//lightStrafeCount++;
 				wait10Msec(irSeekingDelay);
 			}
 			else if (lightStrafeCount % 2 == 0) {
-				encodedDiagonal(-autonomousWheelPower, 0.2);
-				lightStrafeCount++;
+				motorStrafeForDistance(-autonomousWheelPower, 0.05);
+				//lightStrafeCount++;
 				wait10Msec(irSeekingDelay);
 			}
 		}
 		else {
-			motorForDistance(autonomousWheelPower, 0.2);
+			motorForDistance(autonomousWheelPower, 0.1);
+			//lightStrafeCount = 1;
 			wait10Msec(irSeekingDelay);
 		}
 	}
