@@ -26,7 +26,7 @@ void processWheels() {
 	else if(Button(CONTROLLER_A, 6))
 			spinLeft();
 
-	if (((Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X) > 15) || (Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X) < -15)) && !Button(CONTROLLER_A, 7)) {
+	if (((Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X) > JOYSTICK_UPPER_THRESHOLD) || (Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X) < JOYSTICK_LOWER_THRESHOLD)) {
 		MotorF(motor11, Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X));
 		MotorF(motor21, Happy(CONTROLLER_A, JOYSTICK_L, AXIS_X));
 	}
@@ -35,7 +35,7 @@ void processWheels() {
 		MotorS(motor21);
 	}
 
-	if ((Happy(CONTROLLER_A, JOYSTICK_R, AXIS_Y) > 15) || (Happy(CONTROLLER_A, JOYSTICK_R, AXIS_Y) < -15)) {
+	if ((Happy(CONTROLLER_A, JOYSTICK_R, AXIS_Y) > JOYSTICK_UPPER_THRESHOLD) || (Happy(CONTROLLER_A, JOYSTICK_R, AXIS_Y) < JOYSTICK_LOWER_THRESHOLD)) {
 		MotorF(motor12, Happy(CONTROLLER_A, JOYSTICK_R, AXIS_Y));
 		MotorF(motor22, Happy(CONTROLLER_A, JOYSTICK_R, AXIS_Y));
 	}
@@ -71,7 +71,7 @@ void processWheels() {
 }
 
 void processArm() {
-	if ((Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) > 15) || (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) < -15)) {
+	if ((Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) > JOYSTICK_UPPER_THRESHOLD) || (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) < JOYSTICK_LOWER_THRESHOLD)) {
 		if(!touchMuxer1 && !touchMuxer2)
 			MotorF(motorArm, Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2);
 		else if (!touchMuxer1 && (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2 < 0))
