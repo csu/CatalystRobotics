@@ -24,7 +24,7 @@ task main() {
   initializeRobot();
   //waitForStart();
 
-	motorForDistance(autonomousWheelPower, 6.2);
+	motorForDistance(autonomousWheelPower, 6.4);
 	wait10Msec(autonomous10Mdelay);
 	encodedTurn(autonomousWheelPower, 0.5);
 	wait10Msec(autonomous10Mdelay);
@@ -97,7 +97,7 @@ task main() {
 		motorStrafeForDistance(-autonomousWheelPower, 0.35);
   ArmUp();
   wait10Msec(autonomous10Mdelay);
-  motorForDistance(autonomousWheelPower,1);
+  motorForDistance(autonomousWheelPower,1.5);
   wait10Msec(autonomous10Mdelay);
   ArmDownDistance(2);
   wait10Msec(autonomous10Mdelay);
