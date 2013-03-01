@@ -31,11 +31,32 @@ task main() {
 	wait10Msec(autonomous10Mdelay);
 	encodedTurn(autonomousWheelPower, 0.1);
 	wait10Msec(autonomous10Mdelay);
-	//motorForDistance(autonomousWheelPower, 0.25);
+	motorForDistance(autonomousWheelPower, 0.35);
 	//motorStrafeForDistance(autonomousWheelPower, 0.2);
 	wait10Msec(autonomous10Mdelay);
 	ArmUpDistance(7.2);
 	wait10Msec(autonomous10Mdelay);
+	while (currentLightForwardIterations < lightForwardIterations) {
+		currentLight = SensorValue(lightSensor);
+		if (currentLight < lightSensorThreshold) { //-5) || (currentLight > lightSensorThreshold+5)) {
+			if (lightStrafeCount % 2 == 1) {
+				motorStrafeForDistance(autonomousWheelPower, lightFineAdjust);
+				//lightStrafeCount++;
+				wait10Msec(lightDelay);
+			}
+			else if (lightStrafeCount % 2 == 0) {
+				motorStrafeForDistance(-autonomousWheelPower, lightFineAdjust);
+				//lightStrafeCount++;
+				wait10Msec(lightDelay);
+			}
+		}
+		else {
+			motorForDistance(autonomousWheelPower, lightFineAdjust);
+			//lightStrafeCount = 1;
+			lightForwardIterations++;
+			wait10Msec(lightDelay);
+		}
+	}
 	while (SensorValue(IRseeker) != 6) {
 		writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
 		if (SensorValue(IRseeker) == 0) {
