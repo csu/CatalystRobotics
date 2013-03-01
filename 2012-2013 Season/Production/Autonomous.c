@@ -23,16 +23,16 @@ task main() {
   initializeRobot();
   //waitForStart();
 
-	motorForDistance(75, 5.2);
+	motorForDistance(autonomousWheelPower, 5.2);
 	wait10Msec(autonomous10Mdelay);
-	encodedTurn(75, 0.5);
+	encodedTurn(autonomousWheelPower, 0.5);
 	wait10Msec(autonomous10Mdelay);
-	encodedDiagonal(75, 4);
+	encodedDiagonal(autonomousWheelPower, 4);
 	wait10Msec(autonomous10Mdelay);
-	encodedTurn(75, 0.1);
+	encodedTurn(autonomousWheelPower, 0.1);
 	wait10Msec(autonomous10Mdelay);
-	motorForDistance(75, 0.25);
-	motorStrafeForDistance(75, 0.2);
+	motorForDistance(autonomousWheelPower, 0.25);
+	motorStrafeForDistance(autonomousWheelPower, 0.2);
 	wait10Msec(autonomous10Mdelay);
 	ArmUpDistance(7.6);
 	wait10Msec(autonomous10Mdelay);
@@ -40,12 +40,12 @@ task main() {
 		writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
 		if (SensorValue(IRseeker) == 0) {
 			if (irStrafeCount % 2 == 1) {
-				motorStrafeForDistance(-75, 0.2*irStrafeCount);
+				motorStrafeForDistance(-autonomousWheelPower, 0.2*irStrafeCount);
 				irStrafeCount++;
 				wait10Msec(irSeekingDelay);
 			}
 			else if (irStrafeCount % 2 == 0) {
-				motorStrafeForDistance(75, 0.2*irStrafeCount);
+				motorStrafeForDistance(autonomousWheelPower, 0.2*irStrafeCount);
 				irStrafeCount++;
 				wait10Msec(irSeekingDelay);
 			}
@@ -53,11 +53,11 @@ task main() {
 				wait10Msec(irSeekingDelay);
 		}
 		else if (SensorValue(IRseeker) < 6) {
-			motorStrafeForDistance(-75, 0.2);
+			motorStrafeForDistance(-autonomousWheelPower, 0.2);
 			wait10Msec(irSeekingDelay);
 		}
 		else if (SensorValue(IRseeker) > 6) {
-			motorStrafeForDistance(75, 0.2);
+			motorStrafeForDistance(autonomousWheelPower, 0.2);
 			wait10Msec(irSeekingDelay);
 		}
 		else if (SensorValue(IRseeker) == 6) {
@@ -65,12 +65,12 @@ task main() {
 		}
 	}
   ArmUp();
-  wait10Msec(100);
-  motorForDistance(100,1.55);
-  wait10Msec(100);
+  wait10Msec(autonomous10Mdelay);
+  motorForDistance(autonomousWheelPower,1.55);
+  wait10Msec(autonomous10Mdelay);
   ArmDownDistance(2);
-  wait10Msec(100);
-  motorForDistance(-100,3);
-  wait10Msec(100);
+  wait10Msec(autonomous10Mdelay);
+  motorForDistance(-autonomousWheelPower,3);
+  wait10Msec(autonomous10Mdelay);
   ArmDown();
 }
