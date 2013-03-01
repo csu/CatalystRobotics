@@ -23,21 +23,21 @@ task main() {
   initializeRobot();
   //waitForStart();
 
-	motorForDistance(autonomousWheelPower, 6);
+	motorForDistance(autonomousWheelPower, 6.5);
 	wait10Msec(autonomous10Mdelay);
 	encodedTurn(autonomousWheelPower, 0.5);
 	wait10Msec(autonomous10Mdelay);
-	encodedDiagonal(autonomousWheelPower, 4.35);
+	encodedDiagonal(autonomousWheelPower, 4.5);
 	wait10Msec(autonomous10Mdelay);
 	encodedTurn(autonomousWheelPower, 0.1);
 	wait10Msec(autonomous10Mdelay);
-	motorForDistance(autonomousWheelPower, 0.35);
-	//motorStrafeForDistance(autonomousWheelPower, 0.2);
+	motorForDistance(-autonomousWheelPower, 0.10);
+	motorStrafeForDistance(autonomousWheelPower, 0.15);
 	wait10Msec(autonomous10Mdelay);
-	ArmUpDistance(7.2);
-	wait10Msec(autonomous10Mdelay);
+	/*
 	while (currentLightForwardIterations < lightForwardIterations) {
 		currentLight = SensorValue(lightSensor);
+		writeDebugStreamLine("Sensor: %d", currentLight);
 		if (currentLight < lightSensorThreshold) { //-5) || (currentLight > lightSensorThreshold+5)) {
 			if (lightStrafeCount % 2 == 1) {
 				motorStrafeForDistance(autonomousWheelPower, lightFineAdjust);
@@ -57,6 +57,9 @@ task main() {
 			wait10Msec(lightDelay);
 		}
 	}
+	*/
+	ArmUpDistance(7.2);
+	wait10Msec(autonomous10Mdelay);
 	while (SensorValue(IRseeker) != 6) {
 		writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
 		if (SensorValue(IRseeker) == 0) {

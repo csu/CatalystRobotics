@@ -19,12 +19,12 @@ int autonomousWheelPower = 100;
 int irSeekingDelay = 50;
 int irStrafeCount = 1;
 // light sensor
-int lightIterations = 3;
+int lightForwardIterations = 3;
 int currentLight;
-int lightSensorThreshold = 32;
+int lightSensorThreshold = 35;
 int lightStrafeCount = 1;
 int lightDelay = 10;
-int currentLightIterations = 0;
+int currentLightForwardIterations = 0;
 float lightFineAdjust = 0.025;
 
 //replaced by JOYSTICK_UPPER_THRESHOLD and JOYSTICK_LOWER_THRESHOLD

@@ -258,7 +258,7 @@ void ArmDownDistance(float revolutions) {
 	while(nMotorEncoder[motorArm] > -1260*revolutions && !touchMuxer1)
 	{
 		touchMultiplexerUpdate();
-		writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
+		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
 	  motor[motorArm] = -75;
 	}
 	motor[motorArm] = 0;
@@ -269,7 +269,7 @@ void ArmUpDistance(float revolutions) {
 	while(nMotorEncoder[motorArm] < 1260*revolutions && !touchMuxer2)
 	{
 		touchMultiplexerUpdate();
-		writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
+		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
 	  motor[motorArm] = 100;
 	}
 	motor[motorArm] = 0;

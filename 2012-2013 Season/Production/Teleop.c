@@ -83,7 +83,7 @@ void processArm() {
 	}
 	else
 		MotorS(motorArm);
-
+/
 	if (Button(CONTROLLER_B, 4))
 		ArmUpDistance(0.075);
 	else if (Button(CONTROLLER_B, 2))
@@ -97,7 +97,7 @@ void processSensors() {
 task main() {
 	initializeRobot();
 	for (int i=0; ; i++) {
-		//writeDebugStreamLine("Sensor: %d", SensorValue(lightSensor));
+		writeDebugStreamLine("Sensor: %d", SensorValue(lightSensor));
 		CatsAndCorgis();
 		processSensors();
 		processWheels();

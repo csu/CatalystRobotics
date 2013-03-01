@@ -26,18 +26,18 @@ task main() {
 		if (currentLight < lightSensorThreshold) { //-5) || (currentLight > lightSensorThreshold+5)) {
 			if (lightStrafeCount % 2 == 1) {
 				motorStrafeForDistance(autonomousWheelPower, lightFineAdjust);
-				//lightStrafeCount++;
+				lightStrafeCount++;
 				wait10Msec(lightDelay);
 			}
 			else if (lightStrafeCount % 2 == 0) {
 				motorStrafeForDistance(-autonomousWheelPower, lightFineAdjust);
-				//lightStrafeCount++;
+				lightStrafeCount--;
 				wait10Msec(lightDelay);
 			}
 		}
 		else {
-			motorForDistance(autonomousWheelPower, lightFineAdjust);
-			//lightStrafeCount = 1;
+			motorForDistance(autonomousWheelPower, 0.25);
+			lightStrafeCount = 1;
 			wait10Msec(lightDelay);
 		}
 	}
