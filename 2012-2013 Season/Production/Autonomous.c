@@ -41,18 +41,22 @@ task main() {
 	motorForDistance(-autonomousWheelPower, 1);
 	if (irDecision == 5) {
 		wait10Msec(autonomous10Mdelay);
-		encodedTurn(autonomousWheelPower, 0.09);
+		encodedTurn(autonomousWheelPower, 0.11);
 		wait10Msec(autonomous10Mdelay);
 		motorStrafeForDistance(-autonomousWheelPower, 4.2);
+		wait10Msec(autonomous10Mdelay);
+		motorForDistance(autonomousWheelPower, 0.1);
 		wait10Msec(autonomous10Mdelay);
 		encodedDiagonal(autonomousWheelPower, 4.65);
 		//wait10Msec(autonomous10Mdelay);
 		//motorForDistance(autonomousWheelPower, 0.2);
 		wait10Msec(autonomous10Mdelay);
+		motorStrafeForDistance(-autonomousWheelPower, 0.05);
+		wait10Msec(autonomous10Mdelay);
 		//gyroCompensate();
 		while (SensorValue(IRseeker) != irTarget) {
 			writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
-			if (SensorValue(IRseeker) == 0) {
+			if (SensorValue(IRseeker) == 0) {`
 				if (irStrafeCount % 2 == 1) {
 					motorStrafeForDistance(-autonomousWheelPower, 0.2*irStrafeCount);
 					irStrafeCount++;
@@ -92,21 +96,4 @@ task main() {
 	  wait10Msec(autonomous10Mdelay);
 	  ArmDown();
 	}
-
-	while (true) {
-		writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
-		wait10Msec(irSeekingDelay);
-	}
-
-/*
-  ArmUp();
-  wait10Msec(autonomous10Mdelay);
-  motorForDistance(autonomousWheelPower,1);
-  wait10Msec(autonomous10Mdelay);
-  ArmDownDistance(2);
-  wait10Msec(autonomous10Mdelay);
-  motorForDistance(-autonomousWheelPower,3);
-  wait10Msec(autonomous10Mdelay);
-  ArmDown();
-  */
 }
