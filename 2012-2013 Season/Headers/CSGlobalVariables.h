@@ -21,6 +21,8 @@ int irStrafeCount = 1;
 int irTarget = 5;
 int irLeftRightCount = 0;
 int irDecision = 0;
+//gyro sensor
+int GyroOffset, GyroSum, GyroCurrentValue;
 // light sensor
 int lightForwardIterations = 3;
 int currentLight;

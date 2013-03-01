@@ -1,4 +1,5 @@
 #include "../Headers/CSGlobalVariables.h"
+#include "../Drivers/HTGYRO-driver.h"
 
 #ifndef METHODS
 #define METHODS
@@ -108,6 +109,41 @@ int EncoderValue(tMotor motorName) {
   return encoder;
 }
 
+void gyroSumUpdate() {
+	GyroSum = GyroSum + (HTGYROreadRot(gyroSensor) - GyroOffset);
+}
+
+void encodedTurn(int powerToMoveAt, float revolutions) {
+	nMotorEncoder[motor21] = 0;
+	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
+	{
+		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
+	  MotorR(motor11, powerToMoveAt);
+	  MotorF(motor12, powerToMoveAt);
+	  MotorF(motor21, powerToMoveAt);
+	  MotorR(motor22, powerToMoveAt);
+	}
+	motor[motor11] = 0;
+	motor[motor21] = 0;
+	motor[motor12] = 0;
+	motor[motor22] = 0;
+}
+
+void gyroCompensate() {
+	//GyroCurrentValue = HTGYROreadRot(gyroSensor) - GyroOffset;
+	gyroSumUpdate();
+	while ((GyroSum > 10) || (GyroSum < -10)) {
+		if (GyroSum > 10) {
+			encodedTurn(autonomousWheelPower, 0.1);
+			gyroSumUpdate();
+		}
+		else if (GyroSum < -10) {
+			encodedTurn(-autonomousWheelPower, 0.1);
+			gyroSumUpdate();
+		}
+	}
+}
+
 void EncoderPower(tMotor motorName, int power) { motor[motorName] = power; }
 void EncoderReset(tMotor motorName) { nMotorEncoder[motorName] = 0; }
 
@@ -168,6 +204,7 @@ void motorForwardForDistance(int powerToMoveAt, float revolutions) {
 		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor12] = powerToMoveAt;
 	  motor[motor22] = powerToMoveAt;
+	  gyroSumUpdate();
 	}
 	motor[motor12] = 0;
 	motor[motor22] = 0;
@@ -192,6 +229,7 @@ void motorForDistance(int powerToMoveAt, float revolutions) {
 		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor12]);
 	  motor[motor12] = powerToMoveAt;
 	  motor[motor22] = powerToMoveAt;
+	  gyroSumUpdate();
 	}
 	motor[motor12] = 0;
 	motor[motor22] = 0;
@@ -204,6 +242,7 @@ void motorStrafeForDistance(int powerToMoveAt, float revolutions) {
 		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
 	  motor[motor11] = powerToMoveAt;
 	  motor[motor21] = powerToMoveAt;
+	  gyroSumUpdate();
 	}
 	motor[motor11] = 0;
 	motor[motor21] = 0;
@@ -218,22 +257,7 @@ void encodedDiagonal(int powerToMoveAt, float revolutions) {
 	  motor[motor21] = powerToMoveAt;
 	  motor[motor12] = powerToMoveAt;
 	  motor[motor22] = powerToMoveAt;
-	}
-	motor[motor11] = 0;
-	motor[motor21] = 0;
-	motor[motor12] = 0;
-	motor[motor22] = 0;
-}
-
-void encodedTurn(int powerToMoveAt, float revolutions) {
-	nMotorEncoder[motor21] = 0;
-	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
-	{
-		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
-	  MotorR(motor11, powerToMoveAt);
-	  MotorF(motor12, powerToMoveAt);
-	  MotorF(motor21, powerToMoveAt);
-	  MotorR(motor22, powerToMoveAt);
+	  gyroSumUpdate();
 	}
 	motor[motor11] = 0;
 	motor[motor21] = 0;

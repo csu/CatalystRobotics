@@ -25,10 +25,10 @@ task main() {
 		MotorF(motorA, 25);
 		MotorF(motorB, 25);
 		MotorF(motorC, 25);
-		MotorF(motor11, 50);
-		MotorF(motor22, 50);
-		MotorF(motor12, 50);
-		MotorF(motor21, 50);
+		//MotorF(motor11, 50);
+		//MotorF(motor22, 50);
+		//MotorF(motor12, 50);
+		//MotorF(motor21, 50);
 
 	}
 }
