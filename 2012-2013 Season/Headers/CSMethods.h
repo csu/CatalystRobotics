@@ -109,24 +109,6 @@ int EncoderValue(tMotor motorName) {
   return encoder;
 }
 
-void gyroInitialize() {
-  GyroOffset = HTGYROstartCal(gyroSensor);   //start calibration, but do not trust results
-  for (int i = 0 ; i < 20; i++)           //instead read 10 values and generate average offset
-  {
-    GyroSum = GyroSum + HTGYROreadRot(gyroSensor);
-    wait1Msec(20);
-  }
-  GyroOffset = GyroSum / 20.0;
-}
-
-void gyroSumUpdate() {
-	GyroSum = GyroSum + (HTGYROreadRot(gyroSensor) - GyroOffset);
-}
-
-task updateGyroTask() {
-	gyroSumUpdate();
-}
-
 void encodedTurn(int powerToMoveAt, float revolutions) {
 	nMotorEncoder[motor21] = 0;
 	while(abs(nMotorEncoder[motor21]) < 1260*revolutions)
@@ -141,21 +123,6 @@ void encodedTurn(int powerToMoveAt, float revolutions) {
 	motor[motor21] = 0;
 	motor[motor12] = 0;
 	motor[motor22] = 0;
-}
-
-void gyroCompensate() {
-	//GyroCurrentValue = HTGYROreadRot(gyroSensor) - GyroOffset;
-	//gyroSumUpdate();
-	while ((GyroSum > 10) || (GyroSum < -10)) {
-		if (GyroSum > 10) {
-			encodedTurn(autonomousWheelPower, 0.1);
-			//gyroSumUpdate();
-		}
-		else if (GyroSum < -10) {
-			encodedTurn(-autonomousWheelPower, 0.1);
-			//gyroSumUpdate();
-		}
-	}
 }
 
 void EncoderPower(tMotor motorName, int power) { motor[motorName] = power; }
@@ -218,7 +185,6 @@ void motorForwardForDistance(int powerToMoveAt, float revolutions) {
 		//writeDebugStreamLine("Motor Encoder: %d", nMotorEncoder[motor22]);
 	  motor[motor12] = powerToMoveAt;
 	  motor[motor22] = powerToMoveAt;
-	  gyroSumUpdate();
 	}
 	motor[motor12] = 0;
 	motor[motor22] = 0;
@@ -243,7 +209,6 @@ void motorForDistance(int powerToMoveAt, float revolutions) {
 		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor12]);
 	  motor[motor12] = powerToMoveAt;
 	  motor[motor22] = powerToMoveAt;
-	  gyroSumUpdate();
 	}
 	motor[motor12] = 0;
 	motor[motor22] = 0;
@@ -256,7 +221,6 @@ void motorStrafeForDistance(int powerToMoveAt, float revolutions) {
 		//writeDebugStreamLine("Motor encoder: %d", nMotorEncoder[motor21]);
 	  motor[motor11] = powerToMoveAt;
 	  motor[motor21] = powerToMoveAt;
-	  gyroSumUpdate();
 	}
 	motor[motor11] = 0;
 	motor[motor21] = 0;
@@ -271,7 +235,6 @@ void encodedDiagonal(int powerToMoveAt, float revolutions) {
 	  motor[motor21] = powerToMoveAt;
 	  motor[motor12] = powerToMoveAt;
 	  motor[motor22] = powerToMoveAt;
-	  gyroSumUpdate();
 	}
 	motor[motor11] = 0;
 	motor[motor21] = 0;
@@ -311,70 +274,6 @@ void ArmUpDistance(float revolutions) {
 	  motor[motorArm] = 100;
 	}
 	motor[motorArm] = 0;
-}
-
-void holonomicEncodedStrafe(float power, float revolutions) {
-	nMotorEncoder[motor11] = 0;
-	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
-	{
-		//writeDebugStreamLine("Arm Encoder: %d", nMotorEncoder[motorArm]);
-		MotorF(motor12, power);
-		MotorF(motor22, power);
-		MotorF(motor11, power);
-		MotorF(motor21, power);
-	}
-	MotorS(motor12);
-	MotorS(motor22);
-	MotorS(motor11);
-	MotorS(motor21);
-}
-
-void holonomicEncodedForward(float power, float revolutions) {
-	nMotorEncoder[motor11] = 0;
-	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
-	{
-		//writeDebugStreamLine("motor11 Encoder: %d", nMotorEncoder[motor11]);
-		MotorF(motor12, power);
-		MotorF(motor22, power);
-		MotorF(motor11, -power);
-		MotorF(motor21, -power);
-	}
-	MotorS(motor12);
-	MotorS(motor22);
-	MotorS(motor11);
-	MotorS(motor21);
-}
-
-void holonomicEncodedSpinLeft(float power, float revolutions) {
-	nMotorEncoder[motor11] = 0;
-	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
-	{
-		//writeDebugStreamLine("motor11 Encoder: %d", nMotorEncoder[motor11]);
-		MotorF(motor11, power);
-		MotorR(motor12, power);
-		MotorR(motor21, power);
-		MotorF(motor22, power);
-	}
-	MotorS(motor12);
-	MotorS(motor22);
-	MotorS(motor11);
-	MotorS(motor21);
-}
-
-void holonomicEncodedSpinRight(float power, float revolutions) {
-	nMotorEncoder[motor11] = 0;
-	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)
-	{
-		//writeDebugStreamLine("motor11 Encoder: %d", nMotorEncoder[motor11]);
-		MotorR(motor11, power);
-		MotorF(motor12, power);
-		MotorF(motor21, power);
-		MotorR(motor22, power);
-	}
-	MotorS(motor12);
-	MotorS(motor22);
-	MotorS(motor11);
-	MotorS(motor21);
 }
 
 #endif

@@ -1,5 +1,5 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  none)
-#pragma config(Sensor, S2,     gyroSensor,     sensorI2CHiTechnicGyro)
+#pragma config(Sensor, S2,     GYRO,           sensorI2CHiTechnicGyro)
 #pragma config(Sensor, S3,     touchMuxer,     sensorHiTechnicTouchMux)
 #pragma config(Sensor, S4,     IRseeker,       sensorHiTechnicIRSeeker1200)
 #pragma config(Motor,  mtr_S1_C1_1,     motor12,       tmotorTetrix, PIDControl, reversed, encoder)
@@ -15,16 +15,18 @@
 #include "JoystickDriver.c"
 #include "../Headers/CSEnumerated.h"
 #include "../Headers/CSMethods.h"
+#include "../Headers/CSTasks.h"
 #include "../Drivers/HTGYRO-driver.h"
 
 void initializeRobot() {
-	gyroInitialize();
 	return;
 }
 
 task main() {
   initializeRobot();
   //waitForStart();
+
+  StartTask(getHeading);
 
 	motorForDistance(autonomousWheelPower, 6);
 	wait10Msec(autonomous10Mdelay);
