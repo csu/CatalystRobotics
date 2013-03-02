@@ -129,17 +129,31 @@ void EncoderPower(tMotor motorName, int power) { motor[motorName] = power; }
 void EncoderReset(tMotor motorName) { nMotorEncoder[motorName] = 0; }
 
 void spinRight() {
-		MotorF(motor11, 50);
-		MotorR(motor12, 50);
-		MotorR(motor21, 50);
-		MotorF(motor22, 50);
+		MotorF(motor11, 75);
+		MotorR(motor12, 75);
+		MotorR(motor21, 75);
+		MotorF(motor22, 75);
 }
 
 void spinLeft() {
-		MotorR(motor11, 50);
-		MotorF(motor12, 50);
-		MotorF(motor21, 50);
-		MotorR(motor22, 50);
+		MotorR(motor11, 75);
+		MotorF(motor12, 75);
+		MotorF(motor21, 75);
+		MotorR(motor22, 75);
+}
+
+void spinRightPower(int powerEntered) {
+		MotorF(motor11, powerEntered);
+		MotorR(motor12, powerEntered);
+		MotorR(motor21, powerEntered);
+		MotorF(motor22, powerEntered);
+}
+
+void spinLeftPower(int powerEntered) {
+		MotorR(motor11, powerEntered);
+		MotorF(motor12, powerEntered);
+		MotorF(motor21, powerEntered);
+		MotorR(motor22, powerEntered);
 }
 
 void ServoRotate(TServoIndex servoName, short position) { servo[servoName] = position; }
@@ -274,6 +288,23 @@ void ArmUpDistance(float revolutions) {
 	  motor[motorArm] = 100;
 	}
 	motor[motorArm] = 0;
+}
+
+void gyroCompensate() {
+	while (!((currHeading > 358) && (currHeading < 2))) {
+		if ((currHeading > 180) && (currHeading < 358)) {
+			//encodedTurn(25, 0.02);
+			spinLeftPower(20);
+			//wait10Msec(10);
+		}
+		else if ((currHeading > 2) && (currHeading < 181)) {
+			//encodedTurn(-25, 0.02);
+			spinRightPower(20);
+			//wait10Msec(10);
+		}
+		else
+			break;
+	}
 }
 
 #endif
