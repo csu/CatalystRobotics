@@ -104,7 +104,7 @@ void processWheels() {
 }
 
 void processArm() {
-	if ((Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) > JOYSTICK_UPPER_THRESHOLD) || (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) < JOYSTICK_LOWER_THRESHOLD)) {
+	if ((Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) > J OYSTICK_UPPER_THRESHOLD) || (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y) < JOYSTICK_LOWER_THRESHOLD)) {
 		if(!touchMuxer1 && !touchMuxer2)
 			MotorF(motorArm, Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2);
 		else if (!touchMuxer1 && (Happy(CONTROLLER_B, JOYSTICK_R, AXIS_Y)*2 < 0))
