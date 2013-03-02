@@ -100,7 +100,7 @@ void processWheels() {
 	else
 		MotorS(motorB);
 
-	if(Button(CONTROLLER_A, 9)) gyroTurn(45);
+	//if(Button(CONTROLLER_A, 9)) gyroCompensate(); //gyroTurn(45);
 }
 
 void processArm() {
@@ -129,9 +129,9 @@ void processSensors() {
 
 task main() {
 	initializeRobot();
-  StartTask(getHeading);
+  //StartTask(getHeading);
 	for (int i=0; ; i++) {
-		//writeDebugStreamLine("Sensor: %d", SensorValue(lightSensor));
+		//writeDebugStreamLine("Sensor: %d", SensorValue(irSeeker));
 		CatsAndCorgis();
 		processSensors();
 		processWheels();
