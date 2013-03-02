@@ -18,15 +18,7 @@
 #include "../Drivers/HTGYRO-driver.h"
 
 void initializeRobot() {
-	/*
-  GyroOffset = HTGYROstartCal(gyroSensor);   //start calibration, but do not trust results
-  for (int i = 0 ; i < 20; i++)           //instead read 10 values and generate average offset
-  {
-    GyroSum = GyroSum + HTGYROreadRot(gyroSensor);
-    wait1Msec(20);
-  }
-  GyroOffset = GyroSum / 20.0;
-  */
+	gyroInitialize();
 	return;
 }
 
@@ -56,7 +48,7 @@ task main() {
 		//gyroCompensate();
 		while (SensorValue(IRseeker) != irTarget) {
 			writeDebugStreamLine("Sensor: %d", SensorValue(IRseeker));
-			if (SensorValue(IRseeker) == 0) {`
+			if (SensorValue(IRseeker) == 0) {
 				if (irStrafeCount % 2 == 1) {
 					motorStrafeForDistance(-autonomousWheelPower, 0.2*irStrafeCount);
 					irStrafeCount++;
