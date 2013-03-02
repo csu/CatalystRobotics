@@ -3,6 +3,9 @@
 #pragma config(Sensor, S2,     GYRO,           sensorI2CHiTechnicGyro)
 #pragma config(Sensor, S3,     touchMuxer,     sensorHiTechnicTouchMux)
 #pragma config(Sensor, S4,     IRseeker,       sensorHiTechnicIRSeeker1200)
+#pragma config(Motor,  motorA,           ,             tmotorNXT, openLoop)
+#pragma config(Motor,  motorB,           ,             tmotorNXT, openLoop)
+#pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  mtr_S1_C1_1,     motor12,       tmotorTetrix, PIDControl, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     motor11,       tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_1,     motor21,       tmotorTetrix, PIDControl, reversed, encoder)
@@ -78,6 +81,26 @@ void processWheels() {
 	}
 	else
 		MotorS(motorLED);
+
+	if (Button(CONTROLLER_A, 4)) {
+		MotorF(motorA, 90);
+	}
+	else if (Button(CONTROLLER_A, 2)) {
+		MotorF(motorA, -90);
+	}
+	else
+		MotorS(motorA);
+
+	if (Button(CONTROLLER_A, 3)) {
+		MotorF(motorB, 90);
+	}
+	else if (Button(CONTROLLER_A, 1)) {
+		MotorF(motorB, -90);
+	}
+	else
+		MotorS(motorB);
+
+	if(Button(CONTROLLER_A, 9)) gyroCompensate();
 }
 
 void processArm() {
@@ -98,8 +121,6 @@ void processArm() {
 		ArmUpDistance(0.075);
 	else if (Button(CONTROLLER_B, 2))
 		ArmDownDistance(0.075);
-
-	if(Button(CONTROLLER_A, 9)) gyroCompensate();
 }
 
 void processSensors() {

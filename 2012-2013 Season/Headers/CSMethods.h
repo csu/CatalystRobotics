@@ -307,4 +307,21 @@ void gyroCompensate() {
 	}
 }
 
+void gyroTurn(int destination) {
+	while (!((currHeading > (destination-2)) && (currHeading < (destination+2)))) {
+		if ((currHeading > ((360-destination)/2)) && (currHeading < (destination-2))) {
+			//encodedTurn(25, 0.02);
+			spinLeftPower(20);
+			//wait10Msec(10);
+		}
+		else if ((currHeading > (destination+2)) && (currHeading < (((360-destination)/2)+1))) {
+			//encodedTurn(-25, 0.02);
+			spinRightPower(20);
+			//wait10Msec(10);
+		}
+		else
+			break;
+	}
+}
+
 #endif
