@@ -16,6 +16,7 @@
 #include "JoystickDriver.c"
 #include "../Headers/CSEnumerated.h"
 #include "../Headers/CSMethods.h"
+#include "../Headers/CSTasks.h"
 
 void initializeRobot() { return; }
 
@@ -97,6 +98,8 @@ void processArm() {
 		ArmUpDistance(0.075);
 	else if (Button(CONTROLLER_B, 2))
 		ArmDownDistance(0.075);
+
+	if(Button(CONTROLLER_A, 9)) gyroCompensate();
 }
 
 void processSensors() {
@@ -105,6 +108,7 @@ void processSensors() {
 
 task main() {
 	initializeRobot();
+  StartTask(getHeading);
 	for (int i=0; ; i++) {
 		//writeDebugStreamLine("Sensor: %d", SensorValue(lightSensor));
 		CatsAndCorgis();
