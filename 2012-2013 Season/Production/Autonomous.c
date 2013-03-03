@@ -17,7 +17,7 @@
 #include "../Headers/CSEnumerated.h"
 #include "../Headers/CSMethods.h"
 #include "../Headers/CSTasks.h"
-#include "../Drivers/HTGYRO-driver.h"
+//#include "../Drivers/HTGYRO-driver.h"
 
 void initializeRobot() {
 	return;
@@ -35,19 +35,19 @@ task main() {
 	ArmUpDistance(7.2);
 	irDecision = SensorValue(IRseeker);
 	writeDebugStreamLine("irDecision: %d", irDecision);
-	if (irDecision == 4) {
+	if ((irDecision == 3) || (irDecision == 4)) {
 		MotorF(motorLED, 90);
 		wait10Msec(50);
 		MotorS(motorLED);
 	}
-	if ((irDecision == 6) || (irDecision == 7)) {
+	else if ((irDecision == 6) || (irDecision == 7)) {
 		MotorR(motorLED, 90);
 		wait10Msec(50);
 		MotorS(motorLED);
 	}
+	if ((irDecision == 5) || (irDecision == 0)) {
 	motorForDistance(-autonomousWheelPower, 1);
 	wait10Msec(autonomous10Mdelay);
-	if ((irDecision == 5) || (irDecision == 0)) {
 		encodedTurn(autonomousWheelPower, 0.11);
 		wait10Msec(autonomous10Mdelay);
 		motorStrafeForDistance(-autonomousWheelPower, 4.2);
@@ -100,10 +100,12 @@ task main() {
 	  wait10Msec(autonomous10Mdelay);
 	  ArmDown();
 	}
-	else if (irDecision == 4) {
+	else if ((irDecision == 3) || (irDecision == 4)) {
+		motorForDistance(-autonomousWheelPower, 0.5);
+		wait10Msec(autonomous10Mdelay);
 		motorStrafeForDistance(-autonomousWheelPower, 4.05);
 	  wait10Msec(autonomous10Mdelay);
-		motorForDistance(autonomousWheelPower, 3.75);
+		motorForDistance(autonomousWheelPower, 3.25);
 	  wait10Msec(autonomous10Mdelay*5);
 		//gyroCompensate();
 	  //wait10Msec(autonomous10Mdelay*5);
@@ -150,6 +152,8 @@ task main() {
 	  ArmDown();
 	}
 	else if ((irDecision == 6) || (irDecision == 7)) {
+		motorForDistance(-autonomousWheelPower, 1);
+		wait10Msec(autonomous10Mdelay);
 		encodedTurn(autonomousWheelPower, 0.11);
 		wait10Msec(autonomous10Mdelay);
 		motorStrafeForDistance(-autonomousWheelPower, 4.2);
