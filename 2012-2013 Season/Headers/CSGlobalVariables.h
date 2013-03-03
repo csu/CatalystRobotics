@@ -19,6 +19,7 @@ int autonomousWheelPower = 100;
 int irSeekingDelay = 50;
 int irStrafeCount = 1;
 int irTarget = 5;
+int irMiddleTarget = 5;
 int irLeftRightCount = 0;
 int irDecision = 0;
 //gyro sensor
