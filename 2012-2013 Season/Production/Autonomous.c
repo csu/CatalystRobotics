@@ -25,10 +25,10 @@ void initializeRobot() {
 
 task main() {
   initializeRobot();
-  //waitForStart();
+  waitForStart();
+	//wait10Msec(1200);
 
   //StartTask(getHeading);
-	//wait10Msec(200);
 
 	motorForDistance(autonomousWheelPower, 6);
 	wait10Msec(autonomous10Mdelay);
@@ -207,4 +207,5 @@ task main() {
 	  wait10Msec(autonomous10Mdelay);
 	  ArmDown();
 	}
+	motorForDistance(-autonomousWheelPower, 3);
 }

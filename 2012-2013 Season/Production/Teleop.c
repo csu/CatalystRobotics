@@ -79,24 +79,6 @@ void processWheels() {
 	else
 		MotorS(motorLED);
 
-	if (Button(CONTROLLER_A, 4)) {
-		MotorF(motorA, 90);
-	}
-	else if (Button(CONTROLLER_A, 2)) {
-		MotorF(motorA, -90);
-	}
-	else
-		MotorS(motorA);
-
-	if (Button(CONTROLLER_A, 3)) {
-		MotorF(motorB, 90);
-	}
-	else if (Button(CONTROLLER_A, 1)) {
-		MotorF(motorB, -90);
-	}
-	else
-		MotorS(motorB);
-
 	//if(Button(CONTROLLER_A, 9)) gyroCompensate(); //gyroTurn(45);
 }
 
@@ -120,17 +102,21 @@ void processArm() {
 		ArmDownDistance(0.075);
 }
 
+/*
 void processSensors() {
 	touchMultiplexerUpdate();
 }
+*/
 
 task main() {
 	initializeRobot();
   //StartTask(getHeading);
-	for (int i=0; ; i++) {
+  StartTask(multiplexerThreadUpdate);
+	//for (int i=0; ; i++) {
+	while (true) {
 		//writeDebugStreamLine("Sensor: %d", SensorValue(irSeeker));
 		CatsAndCorgis();
-		processSensors();
+		//processSensors();
 		processWheels();
 		processArm();
 	}
