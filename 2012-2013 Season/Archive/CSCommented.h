@@ -1,3 +1,6 @@
+// Created by Christopher Su
+// Catalyst Robotics 2012-2013 Season
+
 ///////////////// Teleop //////////////////////
 
 	/*
