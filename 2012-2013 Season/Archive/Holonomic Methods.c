@@ -1,3 +1,6 @@
+// Created by Christopher Su
+// Catalyst Robotics 2012-2013 Season
+
 void holonomicEncodedStrafe(float power, float revolutions) {
 	nMotorEncoder[motor11] = 0;
 	while(abs(nMotorEncoder[motor11]) < 1260*revolutions)

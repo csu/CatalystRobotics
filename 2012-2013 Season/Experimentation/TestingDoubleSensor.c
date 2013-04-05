@@ -1,3 +1,6 @@
+// Created by Christopher Su
+// Catalyst Robotics 2012-2013 Season
+
 #pragma config(Sensor, S4,     analogSensor,      sensorAnalogActive)
 #pragma config(Sensor, S4,     irsensor2,      sensorHiTechnicIRSeeker1200)
 #pragma config(Motor,  motorA,          nxtMotorA,     tmotorNXT, openLoop)
