@@ -1,3 +1,6 @@
+// Created by Christopher Su
+// Catalyst Robotics 2012-2013 Season
+
 #pragma config(Sensor, S1,     HowAboutNo,     sensorI2CHiTechnicGyro)
 #pragma config(Motor,  motorA,          Thing1,        tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  motorB,          Thing2,        tmotorNXT, PIDControl, encoder)
