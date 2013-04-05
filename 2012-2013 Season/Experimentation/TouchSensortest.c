@@ -1,3 +1,6 @@
+// Created by Christopher Su
+// Catalyst Robotics 2012-2013 Season
+
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTMotor,  none,     none,     none)
 #pragma config(Sensor, S3,     touch1,         sensorTouch)

@@ -1,3 +1,6 @@
+// Created by Christopher Su
+// Catalyst Robotics 2012-2013 Season
+
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  none)
 #pragma config(Sensor, S2,     gyroSensor,     sensorI2CHiTechnicGyro)
 #pragma config(Sensor, S3,     touchMuxer,     sensorHiTechnicTouchMux)
