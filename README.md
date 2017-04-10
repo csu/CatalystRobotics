@@ -1,7 +1,7 @@
 Catalyst Robotics
 =============
 
-This is the repository for the Concordia International School Catalyst FIRST Tech Challenge (FTC) team's code.
+This is the repository for the Catalyst Robotics FIRST Tech Challenge (FTC) team's code.
 
 ## Programmers
 * 2011-2012: [Christopher Su](https://github.com/christophersu)
